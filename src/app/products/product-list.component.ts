@@ -22,7 +22,7 @@ export class ProductListComponent implements OnInit{
         this.filteredProducts = this.listFilter ? this.performFilter(this.listFilter) : this.products;
     }
 
-    filteredProducts = IProduct[];
+    filteredProducts: IProduct[];
     products: IProduct[] = [
         {
             "productId": 1,
@@ -90,8 +90,12 @@ export class ProductListComponent implements OnInit{
     }
 
     performFilter(filterBy: string): IProduct[] {
-        filterBy = filterBy.toLocaleLowerCase;
+        filterBy = filterBy.toLocaleLowerCase();
         return this.products.filter((product: IProduct) => 
-                    product.productName.toLocaleLowerCase.indexOf(filterBy) !== -1);
+                    product.productName.toLocaleLowerCase().indexOf(filterBy) !== -1);
+    }
+
+    onRatingClicked(message: string): void{
+        this.pageTitle = 'Product List: '+message;
     }
 }
